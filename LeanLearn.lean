@@ -116,3 +116,14 @@ def posOrNegThree (s : Sign) : match s with | Sign.pos => Nat | Sign.neg => Int 
 
 #eval posOrNegThree Sign.neg
 #check posOrNegThree Sign.neg
+
+inductive List_test (α : Type) where
+  | nil : List_test α
+  | cos : α → List_test α → List_test α
+
+def string_lsit : List String := ["a", "b"]
+
+def length (α : Type) (l : List α) : Nat :=
+  match l with
+    | List.nil => Nat.zero
+    | List.cos y ys => length Nat l with cos := Nat → List
