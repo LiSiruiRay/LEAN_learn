@@ -93,3 +93,26 @@ def plus (n: Nat) (k: Nat) :=
 match k with
   | Nat.zero => n
   | Nat.succ k' => Nat.succ (plus n k')
+
+--- polymorphism
+structure PPoint (α : Type) where
+  x : α
+  y : α
+
+deriving Repr
+
+def test_ppoint : PPoint Nat := {x := 5, y := 6}
+#eval test_ppoint
+
+
+inductive Sign where
+  | pos
+  | neg
+
+def posOrNegThree (s : Sign) : match s with | Sign.pos => Nat | Sign.neg => Int :=
+  match s with
+    | Sign.pos => 3
+    | Sign.neg => -3
+
+#eval posOrNegThree Sign.neg
+#check posOrNegThree Sign.neg
