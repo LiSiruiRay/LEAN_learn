@@ -31,3 +31,11 @@ def Prod.swap {α β : Type} (pair : α × β) : β × α := (pair.snd, pair.fst
 def test_prod : Prod String (Prod Nat Int) := ("123", 45, -5)
 
 #eval Prod.swap test_prod
+
+-- Rewrite the PetName example to use a custom datatype and compare it to the version that uses Sum.
+
+--- TODO: ask
+
+-- inductive PetName (α : Type) : Type where
+--   | Dog : α → String
+--   | Cat : α → String
