@@ -194,3 +194,12 @@ def List.findFirst? {α : Type} (xs : List α) (predicate : α → Bool) : Optio
 
 def is_b (a : String) : Bool := a == "c"
 #eval List.findFirst? test_list is_b
+
+-- Write a function Prod.swap that swaps the two fields in a pair. Start the definition with def Prod.swap {α β : Type} (pair : α × β) : β × α :=
+
+#check Prod
+def Prod.swap {α β : Type} (pair : α × β) : β × α := (pair.snd, pair.fst)
+
+def test_prod : Prod String (Prod Nat Int) := ("123", 45, -5)
+
+#eval Prod.swap test_prod
