@@ -147,3 +147,50 @@ def fives : String × Nat := ("f", 5)
 def fives_longer : String × Nat := {fst := "f", snd := 5}
 
 -- sum
+def petName : Type := Sum String String
+-- ⊕
+
+def list_petnames : List petName :=
+ [Sum.inl "Spot", Sum.inr "Tiger", Sum.inl "Fifi", Sum.inl "Rex", Sum.inr "Floof"]
+
+def count_dog_names (l : List petName) : Nat :=
+  match l with
+    | List.nil => Nat.zero
+    | List.cons a l =>
+      match a with
+        | Sum.inl d => Nat.succ (count_dog_names l)
+        | Sum.inr c => count_dog_names l
+
+#eval count_dog_names list_petnames
+
+def cdn (l : List petName) : Nat :=
+  match l with
+    | [] => Nat.zero
+    | Sum.inl a :: b => 1 + cdn b
+    | Sum.inr a :: c => cdn c
+
+-- exercise
+def List.find_last_entry (α : Type) (l : List α) : Option α :=
+  match l with
+    | [] => none
+    | a :: b =>
+      match b with
+        | [] => some a
+        | c :: d => List.find_last_entry α b
+
+def List.find_last_entry_simp (α : Type) (l : List α) : Option α :=
+  match l with
+    | [] => none
+    | a :: [] => some a
+    | _ :: b => List.find_last_entry_simp α b
+
+def test_list : List String := ["a", "b", "c", "d"]
+#eval List.find_last_entry_simp String test_list
+
+def List.findFirst? {α : Type} (xs : List α) (predicate : α → Bool) : Option α :=
+  match xs with
+    | [] => none
+    | a :: b => if predicate a then a else List.findFirst? b predicate
+
+def is_b (a : String) : Bool := a == "c"
+#eval List.findFirst? test_list is_b
