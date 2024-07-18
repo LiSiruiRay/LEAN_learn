@@ -95,3 +95,18 @@ def dis_cross {α β γ : Type} (x : α × (β ⊕ γ)) : (α × β) ⊕ (α × 
     match b with
       | Sum.inl c => Sum.inl (a, c)
       | Sum.inr d => Sum.inr (a, d)
+#check dis_cross
+
+/-
+Using the analogy between types and arithmetic, write a function that turns multiplication by two into a sum. In other words, it should have type Bool × α → α ⊕ α.
+-/
+
+-- inductive Bool
+-- open Bool
+#check Bool
+variable {β : Type}
+#check Sum β β
+def two_mul_eq_plus_twice {α : Type} (x : Bool × α) : α ⊕ α :=
+  match x with
+  | (_, a) => Sum.inr a
+  -- | (Bool.false, a) => Sum.inr a
