@@ -123,7 +123,27 @@ inductive List_test (α : Type) where
 
 def string_lsit : List String := ["a", "b"]
 
+-- def length (α : Type) (l : List α) : Nat :=
+--   match l with
+--     | List.nil => Nat.zero
+--     | List.cos y ys => length Nat l with cos := Nat → List
+
+
 def length (α : Type) (l : List α) : Nat :=
   match l with
     | List.nil => Nat.zero
-    | List.cos y ys => length Nat l with cos := Nat → List
+    | List.cons _ ys => Nat.succ (length α ys)
+
+-- option as null
+def List.head_self? (α : Type) (l : List α) : Option α :=
+  match l with
+    | List.nil => none
+    | List.cons y ys => some y
+
+#eval [].head_self? (α := Nat)
+
+-- prod
+def fives : String × Nat := ("f", 5)
+def fives_longer : String × Nat := {fst := "f", snd := 5}
+
+-- sum
