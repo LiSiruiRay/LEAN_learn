@@ -79,3 +79,19 @@ def take {α : Type} (n : Nat) (l : List α) : List α :=
 #eval take 1 ["bolete", "oyster"]
 -- #eval List.cons ("List.nil") (List.cons ("List.nil") (List.nil))
 -- TODO: so nil → nil has no effect?
+
+/-
+Using the analogy between types and arithmetic, write a function that distributes products over sums. In other words, it should have type α × (β ⊕ γ) → (α × β) ⊕ (α × γ).
+-/
+
+#check Prod.mk 1 "x"
+#check [Sum.inl 2, Sum.inr "x"]
+
+-- TODO: did not fully understand
+-- saw answer from: https://github.com/jdan/lean-funcprog/blob/main/Main.lean
+def dis_cross {α β γ : Type} (x : α × (β ⊕ γ)) : (α × β) ⊕ (α × γ) :=
+  match x with
+    | Prod.mk a b =>
+    match b with
+      | Sum.inl c => Sum.inl (a, c)
+      | Sum.inr d => Sum.inr (a, d)
