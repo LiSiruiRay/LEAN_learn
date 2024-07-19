@@ -54,3 +54,12 @@ def reverse (xs : List α) : List α :=
 
 def test_list : List Int := [1, 2, 3, 4, 5]
 #eval reverse test_list
+
+
+
+
+def reverse_self (xs : List α) : List α :=
+  let rec helper : List α → List α → List α
+    | [], sofar => sofar
+    | y :: ys, sofar => helper ys (y :: sofar)
+  helper xs []
