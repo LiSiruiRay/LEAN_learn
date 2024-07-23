@@ -63,3 +63,20 @@ def reverse_self (xs : List α) : List α :=
     | [], sofar => sofar
     | y :: ys, sofar => helper ys (y :: sofar)
   helper xs []
+
+
+
+
+def unzip_self : List (α × β) → List α × List β
+  | [] => ([], [])
+  | (x, y) :: xyz =>
+    let unzipped := unzip_self xyz
+    (x :: unzipped.fst, y :: unzipped.snd)
+
+
+def halve : Nat → Nat
+  | 0 => 0
+  | 1 => 0
+  | n + 2 => 1 + halve n
+
+-- TODO: why doesn't 2 + n work?
