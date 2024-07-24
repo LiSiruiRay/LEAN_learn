@@ -79,4 +79,26 @@ def halve : Nat → Nat
   | 1 => 0
   | n + 2 => 1 + halve n
 
--- TODO: why doesn't 2 + n work?
+-- Solved_tODO: why doesn't 2 + n work?
+
+#eval halve 100
+
+#check fun x => 1 + x
+
+
+#check fun
+  | 0 => 0
+  | Nat.succ k => k
+
+
+#check fun
+  | 0 => none
+  | Nat.succ k => some k
+
+def double : Nat → Nat := fun
+  | 0 => 0
+  | k + 1 => double k + 2
+
+#eval double 5
+
+#check (· + 5)
